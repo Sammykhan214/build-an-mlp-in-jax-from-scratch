@@ -38,11 +38,22 @@ def sample_input_features(key, batch_size, num_features):
     # TODO: draw a batch of random input feature vectors from the PRNG key
     return sample_normal_matrix(key, (batch_size, num_features))
 
-# Step 5 - assign_class_labels (not yet solved)
-# TODO: implement
+# Step 5 - assign_class_labels
+def assign_class_labels(inputs, num_classes):
+    # TODO: return an int32 label per row using the first num_classes feature columns.
+    import jax.numpy as jnp
 
-# Step 6 - one_hot_encode_labels (not yet solved)
-# TODO: implement
+    logits = inputs[:, :num_classes]
+    labels = jnp.argmax(logits, axis=1)
+    return labels.astype(jnp.int32)
+
+# Step 6 - one_hot_encode_labels
+def one_hot_encode_labels(labels, num_classes):
+    # TODO: Convert a 1-D array of integer class indices into a 2-D one-hot matrix of shape (batch, num_classes).
+    import jax.numpy as jnp
+    import jax.nn as jnn
+
+    return jnn.one_hot(labels, num_classes, dtype = jnp.float32)
 
 # Step 7 - init_linear_layer (not yet solved)
 # TODO: implement
